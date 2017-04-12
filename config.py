@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+# ...
+# available languages
+LANGUAGES = {
+    'en': 'English',
+    'es': 'Español'
+}
+
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 

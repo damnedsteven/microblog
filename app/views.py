@@ -6,6 +6,9 @@ from .models import User, Post
 from datetime import datetime
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS
 from .emails import follower_notification
+from app import babel
+from config import LANGUAGES
+from flask_babel import gettext
 
 # index view function suppressed for brevity
 @app.route('/', methods=['GET', 'POST'])
@@ -47,7 +50,7 @@ def load_user(id):
 @oid.after_login
 def after_login(resp):
     if resp.email is None or resp.email == "":
-        flash('Invalid login. Please try again.')
+        flash(gettext('Invalid login. Please try again.'))
         return redirect(url_for('login'))
     user = User.query.filter_by(email=resp.email).first()
     if user is None:
@@ -173,3 +176,7 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
+	
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(LANGUAGES.keys())

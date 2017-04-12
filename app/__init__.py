@@ -3,12 +3,19 @@ from flask_sqlalchemy import SQLAlchemy
 from config import basedir, SQLALCHEMY_DATABASE_URI, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, DOMAIN
 from .momentjs import momentjs
 
+
+
 app = Flask(__name__)
 app.config.from_object('config')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.jinja_env.globals['momentjs'] = momentjs
 db = SQLAlchemy(app)
+
+# provides an extremely easy to use framework to translate the application into different languages
+from flask_babel import Babel
+babel = Babel(app)
+
 ###
 import os
 from flask_login import LoginManager

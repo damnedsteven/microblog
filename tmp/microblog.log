@@ -839,3 +839,76 @@ Traceback (most recent call last):
   File "/srv/proj/flask/microblog/app/views.py", line 163, in search_results
     results = Post.query.whoosh_search(query, MAX_SEARCH_RESULTS).all()
 AttributeError: 'BaseQuery' object has no attribute 'whoosh_search'
+2017-03-28 15:09:17,615 INFO: microblog startup [in /srv/proj/flask/microblog/app/__init__.py:55]
+2017-04-06 12:26:04,840 ERROR: Exception on /login [GET] [in /srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 1182, in _execute_context
+    context)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+pyodbc.Error: ('08S01', '[08S01] [FreeTDS][SQL Server]Write to the server failed (20006) (SQLExecDirectW)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask/app.py", line 1473, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask/app.py", line 1666, in preprocess_request
+    rv = func()
+  File "/srv/proj/flask/microblog/app/views.py", line 77, in before_request
+    if g.user.is_authenticated:
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/werkzeug/local.py", line 343, in __getattr__
+    return getattr(self._get_current_object(), name)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/werkzeug/local.py", line 302, in _get_current_object
+    return self.__local()
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask_login/utils.py", line 302, in _get_user
+    current_app.login_manager._load_user()
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask_login/login_manager.py", line 317, in _load_user
+    return self.reload_user()
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/flask_login/login_manager.py", line 279, in reload_user
+    user = self.user_callback(user_id)
+  File "/srv/proj/flask/microblog/app/views.py", line 48, in load_user
+    return User.query.get(int(id))
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 859, in get
+    return self._get_impl(ident, loading.load_on_ident)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 892, in _get_impl
+    return fallback_fn(self, key)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/orm/loading.py", line 223, in load_on_ident
+    return q.one()
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2790, in one
+    ret = self.one_or_none()
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2760, in one_or_none
+    ret = list(self)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2831, in __iter__
+    return self._execute_and_instances(context)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2854, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/sql/elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 1189, in _execute_context
+    context)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 1393, in _handle_dbapi_exception
+    exc_info
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 1182, in _execute_context
+    context)
+  File "/srv/proj/flask/microblog/env/lib/python3.5/site-packages/sqlalchemy/engine/default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.DBAPIError: (pyodbc.Error) ('08S01', '[08S01] [FreeTDS][SQL Server]Write to the server failed (20006) (SQLExecDirectW)') [SQL: 'SELECT [user].id AS user_id, [user].nickname AS user_nickname, [user].email AS user_email, [user].about_me AS user_about_me, [user].last_seen AS user_last_seen \nFROM [user] \nWHERE [user].id = ?'] [parameters: (1,)]
